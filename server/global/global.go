@@ -39,6 +39,7 @@ var (
 	GVA_MCP_SERVER          *server.MCPServer
 	BlackCache              local_cache.Cache
 	lock                    sync.RWMutex
+	GVA_ITO_DB              *gorm.DB //
 )
 
 // GetGlobalDBByDBName 通过名称获取db list中的db
