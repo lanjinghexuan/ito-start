@@ -1,9 +1,11 @@
 package main
 
 import (
+	"github.com/flipped-aurora/gin-vue-admin/server/api/v1"
 	"github.com/flipped-aurora/gin-vue-admin/server/core"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/initialize"
+	"github.com/flipped-aurora/gin-vue-admin/server/router/ito_user"
 	_ "go.uber.org/automaxprocs"
 	"go.uber.org/zap"
 )
@@ -41,6 +43,9 @@ func initializeSystem() {
 	initialize.OtherInit()
 	global.GVA_LOG = core.Zap() // 初始化zap日志库
 	zap.ReplaceGlobals(global.GVA_LOG)
+	v1.Init() // 初始化API组
+	ito_user.Init() // 初始化ito_user路由
+
 	global.GVA_DB = initialize.Gorm() // gorm连接数据库
 	initialize.Timer()
 	initialize.DBList()

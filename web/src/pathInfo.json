@@ -19,6 +19,8 @@
   "/src/view/example/upload/scanUpload.vue": "scanUpload",
   "/src/view/example/upload/upload.vue": "Upload",
   "/src/view/init/index.vue": "Init",
+  "/src/view/ito_user/lockerOrders/lockerOrders.vue": "LockerOrders",
+  "/src/view/ito_user/lockerOrders/lockerOrdersForm.vue": "LockerOrdersForm",
   "/src/view/ito_user/users/users.vue": "Users",
   "/src/view/ito_user/users/usersForm.vue": "UsersForm",
   "/src/view/layout/aside/asideComponent/asyncSubmenu.vue": "AsyncSubmenu",

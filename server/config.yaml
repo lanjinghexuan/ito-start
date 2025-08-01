@@ -98,13 +98,13 @@ mcp:
     message_path: /message
     url_prefix: ""
 minio:
-    endpoint: yourEndpoint
-    access-key-id: yourAccessKeyId
-    access-key-secret: yourAccessKeySecret
-    bucket-name: yourBucketName
+    endpoint: 14.103.235.215:9000
+    access-key-id: wxy
+    access-key-secret: wxy200621
+    bucket-name: test
     use-ssl: false
     base-path: ""
-    bucket-url: http://host:9000/yourBucketName
+    bucket-url: http://14.103.235.215:9000/test
 mongo:
     coll: ""
     options: ""
@@ -220,7 +220,7 @@ sqlite:
     log-zap: false
 system:
     db-type: mysql
-    oss-type: local
+    oss-type: minio
     router-prefix: ""
     addr: 8888
     iplimit-count: 15000

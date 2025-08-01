@@ -1,19 +1,16 @@
 package ito_user
 
 import (
-	
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
-    "github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
-    "github.com/flipped-aurora/gin-vue-admin/server/model/ito_user"
-    ito_userReq "github.com/flipped-aurora/gin-vue-admin/server/model/ito_user/request"
-    "github.com/gin-gonic/gin"
-    "go.uber.org/zap"
-    "github.com/flipped-aurora/gin-vue-admin/server/utils"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
+	"github.com/flipped-aurora/gin-vue-admin/server/model/ito_user"
+	ito_userReq "github.com/flipped-aurora/gin-vue-admin/server/model/ito_user/request"
+	"github.com/flipped-aurora/gin-vue-admin/server/utils"
+	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 )
 
-type UsersApi struct {}
-
-
+type UsersApi struct{}
 
 // CreateUsers 创建users表
 // @Tags Users
@@ -25,8 +22,8 @@ type UsersApi struct {}
 // @Success 200 {object} response.Response{msg=string} "创建成功"
 // @Router /users/createUsers [post]
 func (usersApi *UsersApi) CreateUsers(c *gin.Context) {
-    // 创建业务用Context
-    ctx := c.Request.Context()
+	// 创建业务用Context
+	ctx := c.Request.Context()
 
 	var users ito_user.Users
 	err := c.ShouldBindJSON(&users)
@@ -34,14 +31,14 @@ func (usersApi *UsersApi) CreateUsers(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-    users.CreatedBy = utils.GetUserID(c)
-	err = usersService.CreateUsers(ctx,&users)
+	users.CreatedBy = utils.GetUserID(c)
+	err = usersService.CreateUsers(ctx, &users)
 	if err != nil {
-        global.GVA_LOG.Error("创建失败!", zap.Error(err))
-		response.FailWithMessage("创建失败:" + err.Error(), c)
+		global.GVA_LOG.Error("创建失败!", zap.Error(err))
+		response.FailWithMessage("创建失败:"+err.Error(), c)
 		return
 	}
-    response.OkWithMessage("创建成功", c)
+	response.OkWithMessage("创建成功", c)
 }
 
 // DeleteUsers 删除users表
@@ -54,15 +51,15 @@ func (usersApi *UsersApi) CreateUsers(c *gin.Context) {
 // @Success 200 {object} response.Response{msg=string} "删除成功"
 // @Router /users/deleteUsers [delete]
 func (usersApi *UsersApi) DeleteUsers(c *gin.Context) {
-    // 创建业务用Context
-    ctx := c.Request.Context()
+	// 创建业务用Context
+	ctx := c.Request.Context()
 
 	ID := c.Query("ID")
-    userID := utils.GetUserID(c)
-	err := usersService.DeleteUsers(ctx,ID,userID)
+	userID := utils.GetUserID(c)
+	err := usersService.DeleteUsers(ctx, ID, userID)
 	if err != nil {
-        global.GVA_LOG.Error("删除失败!", zap.Error(err))
-		response.FailWithMessage("删除失败:" + err.Error(), c)
+		global.GVA_LOG.Error("删除失败!", zap.Error(err))
+		response.FailWithMessage("删除失败:"+err.Error(), c)
 		return
 	}
 	response.OkWithMessage("删除成功", c)
@@ -77,15 +74,15 @@ func (usersApi *UsersApi) DeleteUsers(c *gin.Context) {
 // @Success 200 {object} response.Response{msg=string} "批量删除成功"
 // @Router /users/deleteUsersByIds [delete]
 func (usersApi *UsersApi) DeleteUsersByIds(c *gin.Context) {
-    // 创建业务用Context
-    ctx := c.Request.Context()
+	// 创建业务用Context
+	ctx := c.Request.Context()
 
 	IDs := c.QueryArray("IDs[]")
-    userID := utils.GetUserID(c)
-	err := usersService.DeleteUsersByIds(ctx,IDs,userID)
+	userID := utils.GetUserID(c)
+	err := usersService.DeleteUsersByIds(ctx, IDs, userID)
 	if err != nil {
-        global.GVA_LOG.Error("批量删除失败!", zap.Error(err))
-		response.FailWithMessage("批量删除失败:" + err.Error(), c)
+		global.GVA_LOG.Error("批量删除失败!", zap.Error(err))
+		response.FailWithMessage("批量删除失败:"+err.Error(), c)
 		return
 	}
 	response.OkWithMessage("批量删除成功", c)
@@ -101,8 +98,8 @@ func (usersApi *UsersApi) DeleteUsersByIds(c *gin.Context) {
 // @Success 200 {object} response.Response{msg=string} "更新成功"
 // @Router /users/updateUsers [put]
 func (usersApi *UsersApi) UpdateUsers(c *gin.Context) {
-    // 从ctx获取标准context进行业务行为
-    ctx := c.Request.Context()
+	// 从ctx获取标准context进行业务行为
+	ctx := c.Request.Context()
 
 	var users ito_user.Users
 	err := c.ShouldBindJSON(&users)
@@ -110,11 +107,11 @@ func (usersApi *UsersApi) UpdateUsers(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-    users.UpdatedBy = utils.GetUserID(c)
-	err = usersService.UpdateUsers(ctx,users)
+	users.UpdatedBy = utils.GetUserID(c)
+	err = usersService.UpdateUsers(ctx, users)
 	if err != nil {
-        global.GVA_LOG.Error("更新失败!", zap.Error(err))
-		response.FailWithMessage("更新失败:" + err.Error(), c)
+		global.GVA_LOG.Error("更新失败!", zap.Error(err))
+		response.FailWithMessage("更新失败:"+err.Error(), c)
 		return
 	}
 	response.OkWithMessage("更新成功", c)
@@ -130,18 +127,19 @@ func (usersApi *UsersApi) UpdateUsers(c *gin.Context) {
 // @Success 200 {object} response.Response{data=ito_user.Users,msg=string} "查询成功"
 // @Router /users/findUsers [get]
 func (usersApi *UsersApi) FindUsers(c *gin.Context) {
-    // 创建业务用Context
-    ctx := c.Request.Context()
+	// 创建业务用Context
+	ctx := c.Request.Context()
 
 	ID := c.Query("ID")
-	reusers, err := usersService.GetUsers(ctx,ID)
+	reusers, err := usersService.GetUsers(ctx, ID)
 	if err != nil {
-        global.GVA_LOG.Error("查询失败!", zap.Error(err))
-		response.FailWithMessage("查询失败:" + err.Error(), c)
+		global.GVA_LOG.Error("查询失败!", zap.Error(err))
+		response.FailWithMessage("查询失败:"+err.Error(), c)
 		return
 	}
 	response.OkWithData(reusers, c)
 }
+
 // GetUsersList 分页获取users表列表
 // @Tags Users
 // @Summary 分页获取users表列表
@@ -152,8 +150,8 @@ func (usersApi *UsersApi) FindUsers(c *gin.Context) {
 // @Success 200 {object} response.Response{data=response.PageResult,msg=string} "获取成功"
 // @Router /users/getUsersList [get]
 func (usersApi *UsersApi) GetUsersList(c *gin.Context) {
-    // 创建业务用Context
-    ctx := c.Request.Context()
+	// 创建业务用Context
+	ctx := c.Request.Context()
 
 	var pageInfo ito_userReq.UsersSearch
 	err := c.ShouldBindQuery(&pageInfo)
@@ -161,18 +159,18 @@ func (usersApi *UsersApi) GetUsersList(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-	list, total, err := usersService.GetUsersInfoList(ctx,pageInfo)
+	list, total, err := usersService.GetUsersInfoList(ctx, pageInfo)
 	if err != nil {
-	    global.GVA_LOG.Error("获取失败!", zap.Error(err))
-        response.FailWithMessage("获取失败:" + err.Error(), c)
-        return
-    }
-    response.OkWithDetailed(response.PageResult{
-        List:     list,
-        Total:    total,
-        Page:     pageInfo.Page,
-        PageSize: pageInfo.PageSize,
-    }, "获取成功", c)
+		global.GVA_LOG.Error("获取失败!", zap.Error(err))
+		response.FailWithMessage("获取失败:"+err.Error(), c)
+		return
+	}
+	response.OkWithDetailed(response.PageResult{
+		List:     list,
+		Total:    total,
+		Page:     pageInfo.Page,
+		PageSize: pageInfo.PageSize,
+	}, "获取成功", c)
 }
 
 // GetUsersPublic 不需要鉴权的users表接口
@@ -183,13 +181,21 @@ func (usersApi *UsersApi) GetUsersList(c *gin.Context) {
 // @Success 200 {object} response.Response{data=object,msg=string} "获取成功"
 // @Router /users/getUsersPublic [get]
 func (usersApi *UsersApi) GetUsersPublic(c *gin.Context) {
-    // 创建业务用Context
-    ctx := c.Request.Context()
+	// 创建业务用Context
+	ctx := c.Request.Context()
 
-    // 此接口不需要鉴权
-    // 示例为返回了一个固定的消息接口，一般本接口用于C端服务，需要自己实现业务逻辑
-    usersService.GetUsersPublic(ctx)
-    response.OkWithDetailed(gin.H{
-       "info": "不需要鉴权的users表接口信息",
-    }, "获取成功", c)
+	// 此接口不需要鉴权
+	// 示例为返回了一个固定的消息接口，一般本接口用于C端服务，需要自己实现业务逻辑
+	usersService.GetUsersPublic(ctx)
+	response.OkWithDetailed(gin.H{
+		"info": "不需要鉴权的users表接口信息",
+	}, "获取成功", c)
 }
+
+// UserList 列表
+// @Tags Users
+// @Summary 列表
+// @Accept application/json
+// @Produce application/json
+// @Success 200 {object} response.Response{data=[]ito_user.Users,msg=string} "获取成功"
+// @Router /users/userList [GET]

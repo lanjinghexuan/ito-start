@@ -5,24 +5,23 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UsersRouter struct {}
+type UsersRouter struct{}
 
-// InitUsersRouter 初始化 users表 路由信息
-func (s *UsersRouter) InitUsersRouter(Router *gin.RouterGroup,PublicRouter *gin.RouterGroup) {
+func (s *UsersRouter) InitUsersRouter(Router *gin.RouterGroup, PublicRouter *gin.RouterGroup) {
 	usersRouter := Router.Group("users").Use(middleware.OperationRecord())
 	usersRouterWithoutRecord := Router.Group("users")
 	usersRouterWithoutAuth := PublicRouter.Group("users")
 	{
-		usersRouter.POST("createUsers", usersApi.CreateUsers)   // 新建users表
-		usersRouter.DELETE("deleteUsers", usersApi.DeleteUsers) // 删除users表
-		usersRouter.DELETE("deleteUsersByIds", usersApi.DeleteUsersByIds) // 批量删除users表
-		usersRouter.PUT("updateUsers", usersApi.UpdateUsers)    // 更新users表
+		usersRouter.POST("createUsers", usersApi.CreateUsers)
+		usersRouter.DELETE("deleteUsers", usersApi.DeleteUsers)
+		usersRouter.DELETE("deleteUsersByIds", usersApi.DeleteUsersByIds)
+		usersRouter.PUT("updateUsers", usersApi.UpdateUsers)
 	}
 	{
-		usersRouterWithoutRecord.GET("findUsers", usersApi.FindUsers)        // 根据ID获取users表
-		usersRouterWithoutRecord.GET("getUsersList", usersApi.GetUsersList)  // 获取users表列表
+		usersRouterWithoutRecord.GET("findUsers", usersApi.FindUsers)
+		usersRouterWithoutRecord.GET("getUsersList", usersApi.GetUsersList)
 	}
 	{
-	    usersRouterWithoutAuth.GET("getUsersPublic", usersApi.GetUsersPublic)  // users表开放接口
+		usersRouterWithoutAuth.GET("getUsersPublic", usersApi.GetUsersPublic)
 	}
 }

@@ -108,3 +108,11 @@ export const getUsersPublic = () => {
     method: 'get',
   })
 }
+// UserList 列表
+// @Tags Users
+// @Summary 列表
+// @Accept application/json
+// @Produce application/json
+// @Success 200 {object} response.Response{data=object,msg=string} "成功"
+// @Router /users/userList [GET]
+
