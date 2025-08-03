@@ -13,14 +13,14 @@ type LockerOrdersService struct{}
 // CreateLockerOrders 创建lockerOrders表记录
 // Author [yourname](https://github.com/yourname)
 func (lockerOrdersService *LockerOrdersService) CreateLockerOrders(ctx context.Context, lockerOrders *ito_user.LockerOrders) (err error) {
-	err = global.GVA_DB.Create(lockerOrders).Error
+	err = global.GVA_ITO_DB.Create(lockerOrders).Error
 	return err
 }
 
 // DeleteLockerOrders 删除lockerOrders表记录
 // Author [yourname](https://github.com/yourname)
 func (lockerOrdersService *LockerOrdersService) DeleteLockerOrders(ctx context.Context, ID string, userID uint) (err error) {
-	err = global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+	err = global.GVA_ITO_DB.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Model(&ito_user.LockerOrders{}).Where("id = ?", ID).Update("deleted_by", userID).Error; err != nil {
 			return err
 		}
@@ -35,7 +35,7 @@ func (lockerOrdersService *LockerOrdersService) DeleteLockerOrders(ctx context.C
 // DeleteLockerOrdersByIds 批量删除lockerOrders表记录
 // Author [yourname](https://github.com/yourname)
 func (lockerOrdersService *LockerOrdersService) DeleteLockerOrdersByIds(ctx context.Context, IDs []string, deleted_by uint) (err error) {
-	err = global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+	err = global.GVA_ITO_DB.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Model(&ito_user.LockerOrders{}).Where("id in ?", IDs).Update("deleted_by", deleted_by).Error; err != nil {
 			return err
 		}
@@ -50,14 +50,14 @@ func (lockerOrdersService *LockerOrdersService) DeleteLockerOrdersByIds(ctx cont
 // UpdateLockerOrders 更新lockerOrders表记录
 // Author [yourname](https://github.com/yourname)
 func (lockerOrdersService *LockerOrdersService) UpdateLockerOrders(ctx context.Context, lockerOrders ito_user.LockerOrders) (err error) {
-	err = global.GVA_DB.Model(&ito_user.LockerOrders{}).Where("id = ?", lockerOrders.ID).Updates(&lockerOrders).Error
+	err = global.GVA_ITO_DB.Model(&ito_user.LockerOrders{}).Where("id = ?", lockerOrders.ID).Updates(&lockerOrders).Error
 	return err
 }
 
 // GetLockerOrders 根据ID获取lockerOrders表记录
 // Author [yourname](https://github.com/yourname)
 func (lockerOrdersService *LockerOrdersService) GetLockerOrders(ctx context.Context, ID string) (lockerOrders ito_user.LockerOrders, err error) {
-	err = global.GVA_DB.Where("id = ?", ID).First(&lockerOrders).Error
+	err = global.GVA_ITO_DB.Where("id = ?", ID).First(&lockerOrders).Error
 	return
 }
 
@@ -67,7 +67,7 @@ func (lockerOrdersService *LockerOrdersService) GetLockerOrdersInfoList(ctx cont
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
 	// 创建db
-	db := global.GVA_DB.Model(&ito_user.LockerOrders{})
+	db := global.GVA_ITO_DB.Model(&ito_user.LockerOrders{})
 	var lockerOrderss []ito_user.LockerOrders
 	// 如果有条件搜索 下方会自动创建搜索语句
 	if len(info.CreatedAtRange) == 2 {

@@ -148,6 +148,20 @@ mysql:
     max-open-conns: 100
     singular: false
     log-zap: false
+ito_mysql:
+    prefix: ""
+    port: "3306"
+    config: charset=utf8mb4&parseTime=True&loc=Local
+    db-name: ito
+    username: root
+    password: Hao@10086
+    path: 8.155.62.49
+    engine: ""
+    log-mode: info
+    max-idle-conns: 10
+    max-open-conns: 100
+    singular: false
+    log-zap: false
 oracle:
     prefix: ""
     port: ""

@@ -76,3 +76,8 @@ func RegisterTables() {
 	}
 	global.GVA_LOG.Info("register table success")
 }
+
+func ItoGorm() *gorm.DB {
+	m := global.GVA_CONFIG.ItoMysql
+	return initMysqlDatabase(m)
+}
