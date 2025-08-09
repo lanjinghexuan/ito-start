@@ -23,58 +23,24 @@
           />
        </el-form-item>
       
-            <el-form-item label="业务订单号（唯一标识）" prop="orderNumber">
+            <el-form-item label="业务订单号" prop="orderNumber">
   <el-input v-model="searchInfo.orderNumber" placeholder="搜索条件" />
 </el-form-item>
             
-            <el-form-item label="用户ID（关联用户表）" prop="userId">
+            <el-form-item label="用户ID" prop="userId">
   <el-input v-model.number="searchInfo.userId" placeholder="搜索条件" />
 </el-form-item>
-            
-            <el-form-item label="寄存开始时间" prop="startTime">
-<el-date-picker v-model="searchInfo.startTime" type="datetime" placeholder="搜索条件"></el-date-picker></el-form-item>
-            
-            <el-form-item label="计划寄存时长（小时）" prop="scheduledDuration">
-  <el-input v-model.number="searchInfo.scheduledDuration" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="实际寄存时长（小时）" prop="actualDuration">
-  <el-input v-model.number="searchInfo.actualDuration" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="基础费用" prop="price">
-  <el-input v-model.number="searchInfo.price" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="优惠金额" prop="discount">
-  <el-input v-model.number="searchInfo.discount" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="实付金额" prop="amountPaid">
-  <el-input v-model.number="searchInfo.amountPaid" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="寄存网点名称" prop="storageLocationName">
-  <el-input v-model="searchInfo.storageLocationName" placeholder="搜索条件" />
-</el-form-item>
-            
+
             <el-form-item label="柜子ID" prop="cabinetId">
   <el-input v-model.number="searchInfo.cabinetId" placeholder="搜索条件" />
 </el-form-item>
             
-            <el-form-item label="订单状态：1-待支付、2-寄存中、3-已完成、4-已取消、5-超时、6-异常" prop="status">
+            <el-form-item label="订单状态" prop="status">
   <el-select v-model="searchInfo.status" clearable filterable placeholder="请选择" @clear="()=>{searchInfo.status=undefined}">
     <el-option v-for="(item,key) in statusOptions" :key="key" :label="item.label" :value="item.value" />
   </el-select>
 </el-form-item>
-            
-            <el-form-item label="创建时间" prop="createTime">
-<el-date-picker v-model="searchInfo.createTime" type="datetime" placeholder="搜索条件"></el-date-picker></el-form-item>
-            
-            <el-form-item label="更新时间" prop="updateTime">
-<el-date-picker v-model="searchInfo.updateTime" type="datetime" placeholder="搜索条件"></el-date-picker></el-form-item>
-            
-            <el-form-item label="押金状态：1-已支付、2-已退还、3-已扣除" prop="depositStatus">
+            <el-form-item label="押金状态" prop="depositStatus">
   <el-select v-model="searchInfo.depositStatus" clearable filterable placeholder="请选择" @clear="()=>{searchInfo.depositStatus=undefined}">
     <el-option v-for="(item,key) in depositStatusOptions" :key="key" :label="item.label" :value="item.value" />
   </el-select>
@@ -84,9 +50,7 @@
   <el-input v-model.number="searchInfo.lockerPointId" placeholder="搜索条件" />
 </el-form-item>
             
-            <el-form-item label="title字段" prop="title">
-  <el-input v-model="searchInfo.title" placeholder="搜索条件" />
-</el-form-item>
+
             
 
         <template v-if="showAllQuery">
@@ -123,16 +87,16 @@
             <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
         
-            <el-table-column align="left" label="业务订单号（唯一标识）" prop="orderNumber" width="120" />
+            <el-table-column align="left" label="业务订单号" prop="orderNumber" width="120" />
 
-            <el-table-column align="left" label="用户ID（关联用户表）" prop="userId" width="120" />
+            <el-table-column align="left" label="用户ID" prop="userId" width="120" />
 
             <el-table-column align="left" label="寄存开始时间" prop="startTime" width="180">
    <template #default="scope">{{ formatDate(scope.row.startTime) }}</template>
 </el-table-column>
-            <el-table-column align="left" label="计划寄存时长（小时）" prop="scheduledDuration" width="120" />
+            <el-table-column align="left" label="计划寄存时长" prop="scheduledDuration" width="120" />
 
-            <el-table-column align="left" label="实际寄存时长（小时）" prop="actualDuration" width="120" />
+            <el-table-column align="left" label="实际寄存时长" prop="actualDuration" width="120" />
 
             <el-table-column align="left" label="基础费用" prop="price" width="120" />
 
@@ -144,7 +108,7 @@
 
             <el-table-column align="left" label="柜子ID" prop="cabinetId" width="120" />
 
-            <el-table-column align="left" label="订单状态：1-待支付、2-寄存中、3-已完成、4-已取消、5-超时、6-异常" prop="status" width="120">
+            <el-table-column align="left" label="订单状态" prop="status" width="120">
     <template #default="scope">
     {{ filterDict(scope.row.status,statusOptions) }}
     </template>
@@ -155,14 +119,14 @@
             <el-table-column align="left" label="更新时间" prop="updateTime" width="180">
    <template #default="scope">{{ formatDate(scope.row.updateTime) }}</template>
 </el-table-column>
-            <el-table-column align="left" label="押金状态：1-已支付、2-已退还、3-已扣除" prop="depositStatus" width="120">
+            <el-table-column align="left" label="押金状态" prop="depositStatus" width="120">
     <template #default="scope">
     {{ filterDict(scope.row.depositStatus,depositStatusOptions) }}
     </template>
 </el-table-column>
             <el-table-column align="left" label="寄存点id" prop="lockerPointId" width="120" />
 
-            <el-table-column align="left" label="title字段" prop="title" width="120" />
+            <el-table-column align="left" label="标题" prop="title" width="120" />
 
         <el-table-column align="left" label="操作" fixed="right" :min-width="appStore.operateMinWith">
             <template #default="scope">
@@ -196,20 +160,20 @@
             </template>
 
           <el-form :model="formData" label-position="top" ref="elFormRef" :rules="rule" label-width="80px">
-            <el-form-item label="业务订单号（唯一标识）:" prop="orderNumber">
-    <el-input v-model="formData.orderNumber" :clearable="true" placeholder="请输入业务订单号（唯一标识）" />
+            <el-form-item label="业务订单号:" prop="orderNumber">
+    <el-input v-model="formData.orderNumber" :clearable="true" placeholder="请输入业务订单号" />
 </el-form-item>
-            <el-form-item label="用户ID（关联用户表）:" prop="userId">
-    <el-input v-model.number="formData.userId" :clearable="true" placeholder="请输入用户ID（关联用户表）" />
+            <el-form-item label="用户ID:" prop="userId">
+    <el-input v-model.number="formData.userId" :clearable="true" placeholder="请输入用户ID" />
 </el-form-item>
             <el-form-item label="寄存开始时间:" prop="startTime">
     <el-date-picker v-model="formData.startTime" type="date" style="width:100%" placeholder="选择日期" :clearable="true" />
 </el-form-item>
-            <el-form-item label="计划寄存时长（小时）:" prop="scheduledDuration">
-    <el-input v-model.number="formData.scheduledDuration" :clearable="true" placeholder="请输入计划寄存时长（小时）" />
+            <el-form-item label="计划寄存时长:" prop="scheduledDuration">
+    <el-input v-model.number="formData.scheduledDuration" :clearable="true" placeholder="请输入计划寄存时长" />
 </el-form-item>
-            <el-form-item label="实际寄存时长（小时）:" prop="actualDuration">
-    <el-input v-model.number="formData.actualDuration" :clearable="true" placeholder="请输入实际寄存时长（小时）" />
+            <el-form-item label="实际寄存时长:" prop="actualDuration">
+    <el-input v-model.number="formData.actualDuration" :clearable="true" placeholder="请输入实际寄存时长" />
 </el-form-item>
             <el-form-item label="基础费用:" prop="price">
     <el-input-number v-model="formData.price" style="width:100%" :precision="2" :clearable="true" />
@@ -226,8 +190,8 @@
             <el-form-item label="柜子ID:" prop="cabinetId">
     <el-input v-model.number="formData.cabinetId" :clearable="true" placeholder="请输入柜子ID" />
 </el-form-item>
-            <el-form-item label="订单状态：1-待支付、2-寄存中、3-已完成、4-已取消、5-超时、6-异常:" prop="status">
-    <el-select v-model="formData.status" placeholder="请选择订单状态：1-待支付、2-寄存中、3-已完成、4-已取消、5-超时、6-异常" style="width:100%" filterable :clearable="true">
+            <el-form-item label="订单状态:" prop="status">
+    <el-select v-model="formData.status" placeholder="请选择订单状态" style="width:100%" filterable :clearable="true">
         <el-option v-for="(item,key) in statusOptions" :key="key" :label="item.label" :value="item.value" />
     </el-select>
 </el-form-item>
@@ -237,35 +201,35 @@
             <el-form-item label="更新时间:" prop="updateTime">
     <el-date-picker v-model="formData.updateTime" type="date" style="width:100%" placeholder="选择日期" :clearable="true" />
 </el-form-item>
-            <el-form-item label="押金状态：1-已支付、2-已退还、3-已扣除:" prop="depositStatus">
-    <el-select v-model="formData.depositStatus" placeholder="请选择押金状态：1-已支付、2-已退还、3-已扣除" style="width:100%" filterable :clearable="true">
+            <el-form-item label="押金状态:" prop="depositStatus">
+    <el-select v-model="formData.depositStatus" placeholder="请选择押金状态" style="width:100%" filterable :clearable="true">
         <el-option v-for="(item,key) in depositStatusOptions" :key="key" :label="item.label" :value="item.value" />
     </el-select>
 </el-form-item>
             <el-form-item label="寄存点id:" prop="lockerPointId">
     <el-input v-model.number="formData.lockerPointId" :clearable="true" placeholder="请输入寄存点id" />
 </el-form-item>
-            <el-form-item label="title字段:" prop="title">
-    <el-input v-model="formData.title" :clearable="true" placeholder="请输入title字段" />
+            <el-form-item label="标题:" prop="title">
+    <el-input v-model="formData.title" :clearable="true" placeholder="请输入标题" />
 </el-form-item>
           </el-form>
     </el-drawer>
 
     <el-drawer destroy-on-close :size="appStore.drawerSize" v-model="detailShow" :show-close="true" :before-close="closeDetailShow" title="查看">
             <el-descriptions :column="1" border>
-                    <el-descriptions-item label="业务订单号（唯一标识）">
+                    <el-descriptions-item label="业务订单号">
     {{ detailForm.orderNumber }}
 </el-descriptions-item>
-                    <el-descriptions-item label="用户ID（关联用户表）">
+                    <el-descriptions-item label="用户ID">
     {{ detailForm.userId }}
 </el-descriptions-item>
                     <el-descriptions-item label="寄存开始时间">
     {{ detailForm.startTime }}
 </el-descriptions-item>
-                    <el-descriptions-item label="计划寄存时长（小时）">
+                    <el-descriptions-item label="计划寄存时长">
     {{ detailForm.scheduledDuration }}
 </el-descriptions-item>
-                    <el-descriptions-item label="实际寄存时长（小时）">
+                    <el-descriptions-item label="实际寄存时长">
     {{ detailForm.actualDuration }}
 </el-descriptions-item>
                     <el-descriptions-item label="基础费用">
@@ -283,7 +247,7 @@
                     <el-descriptions-item label="柜子ID">
     {{ detailForm.cabinetId }}
 </el-descriptions-item>
-                    <el-descriptions-item label="订单状态：1-待支付、2-寄存中、3-已完成、4-已取消、5-超时、6-异常">
+                    <el-descriptions-item label="订单状态">
     {{ detailForm.status }}
 </el-descriptions-item>
                     <el-descriptions-item label="创建时间">
@@ -292,13 +256,13 @@
                     <el-descriptions-item label="更新时间">
     {{ detailForm.updateTime }}
 </el-descriptions-item>
-                    <el-descriptions-item label="押金状态：1-已支付、2-已退还、3-已扣除">
+                    <el-descriptions-item label="押金状态">
     {{ detailForm.depositStatus }}
 </el-descriptions-item>
                     <el-descriptions-item label="寄存点id">
     {{ detailForm.lockerPointId }}
 </el-descriptions-item>
-                    <el-descriptions-item label="title字段">
+                    <el-descriptions-item label="标题">
     {{ detailForm.title }}
 </el-descriptions-item>
             </el-descriptions>

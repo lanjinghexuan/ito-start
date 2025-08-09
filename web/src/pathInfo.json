@@ -25,6 +25,8 @@
   "/src/view/init/index.vue": "Init",
   "/src/view/ito_user/lockerOrders/lockerOrders.vue": "LockerOrders",
   "/src/view/ito_user/lockerOrders/lockerOrdersForm.vue": "LockerOrdersForm",
+  "/src/view/ito_user/lockerPricingRules/lockerPricingRules.vue": "LockerPricingRules",
+  "/src/view/ito_user/lockerPricingRules/lockerPricingRulesForm.vue": "LockerPricingRulesForm",
   "/src/view/ito_user/users/users.vue": "Users",
   "/src/view/ito_user/users/usersForm.vue": "UsersForm",
   "/src/view/layout/aside/asideComponent/asyncSubmenu.vue": "AsyncSubmenu",

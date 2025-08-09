@@ -26,60 +26,8 @@
             <el-form-item label="网点ID" prop="networkId">
   <el-input v-model.number="searchInfo.networkId" placeholder="搜索条件" />
 </el-form-item>
-            
-            <el-form-item label="规则名称" prop="ruleName">
-  <el-input v-model="searchInfo.ruleName" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="1-计时收费 2-按日收费" prop="feeType">
-  <el-select v-model="searchInfo.feeType" clearable filterable placeholder="请选择" @clear="()=>{searchInfo.feeType=undefined}">
-    <el-option v-for="(item,key) in fee_typeOptions" :key="key" :label="item.label" :value="item.value" />
-  </el-select>
-</el-form-item>
-            
-            <el-form-item label="1-小柜子 2-大柜子" prop="lockerType">
-  <el-select v-model="searchInfo.lockerType" clearable filterable placeholder="请选择" @clear="()=>{searchInfo.lockerType=undefined}">
-    <el-option v-for="(item,key) in locker_typeOptions" :key="key" :label="item.label" :value="item.value" />
-  </el-select>
-</el-form-item>
-            
-            <el-form-item label="免费时长(小时)" prop="freeDuration">
-  <el-input v-model.number="searchInfo.freeDuration" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="是否启用押金" prop="isDepositEnabled">
-  <el-select v-model="searchInfo.isDepositEnabled" clearable filterable placeholder="请选择" @clear="()=>{searchInfo.isDepositEnabled=undefined}">
-    <el-option v-for="(item,key) in is_deposit_enabledOptions" :key="key" :label="item.label" :value="item.value" />
-  </el-select>
-</el-form-item>
-            
-            <el-form-item label="是否启用预付" prop="isAdvancePay">
-  <el-select v-model="searchInfo.isAdvancePay" clearable filterable placeholder="请选择" @clear="()=>{searchInfo.isAdvancePay=undefined}">
-    <el-option v-for="(item,key) in is_advance_payOptions" :key="key" :label="item.label" :value="item.value" />
-  </el-select>
-</el-form-item>
-            
-            <el-form-item label="每小时费用" prop="hourlyRate">
-  <el-input v-model.number="searchInfo.hourlyRate" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="24小时封顶价" prop="dailyCap">
-  <el-input v-model.number="searchInfo.dailyCap" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="每日费用" prop="dailyRate">
-  <el-input v-model.number="searchInfo.dailyRate" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="预付金额" prop="advanceAmount">
-  <el-input v-model.number="searchInfo.advanceAmount" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="押金金额" prop="depositAmount">
-  <el-input v-model.number="searchInfo.depositAmount" placeholder="搜索条件" />
-</el-form-item>
-            
-            <el-form-item label="1-生效 0-失效" prop="status">
+
+            <el-form-item label="状态" prop="status">
   <el-select v-model="searchInfo.status" clearable filterable placeholder="请选择" @clear="()=>{searchInfo.status=undefined}">
     <el-option v-for="(item,key) in rule_statusOptions" :key="key" :label="item.label" :value="item.value" />
   </el-select>
@@ -124,17 +72,17 @@
 
             <el-table-column align="left" label="规则名称" prop="ruleName" width="120" />
 
-            <el-table-column align="left" label="1-计时收费 2-按日收费" prop="feeType" width="120">
+            <el-table-column align="left" label="收费类型" prop="feeType" width="120">
     <template #default="scope">
     {{ filterDict(scope.row.feeType,fee_typeOptions) }}
     </template>
 </el-table-column>
-            <el-table-column align="left" label="1-小柜子 2-大柜子" prop="lockerType" width="120">
+            <el-table-column align="left" label="柜子类型" prop="lockerType" width="120">
     <template #default="scope">
     {{ filterDict(scope.row.lockerType,locker_typeOptions) }}
     </template>
 </el-table-column>
-            <el-table-column align="left" label="免费时长(小时)" prop="freeDuration" width="120" />
+            <el-table-column align="left" label="免费时长" prop="freeDuration" width="120" />
 
             <el-table-column align="left" label="是否启用押金" prop="isDepositEnabled" width="120">
     <template #default="scope">
@@ -156,7 +104,7 @@
 
             <el-table-column align="left" label="押金金额" prop="depositAmount" width="120" />
 
-            <el-table-column align="left" label="1-生效 0-失效" prop="status" width="120">
+            <el-table-column align="left" label="状态" prop="status" width="120">
     <template #default="scope">
     {{ filterDict(scope.row.status,rule_statusOptions) }}
     </template>
@@ -199,17 +147,17 @@
             <el-form-item label="规则名称:" prop="ruleName">
     <el-input v-model="formData.ruleName" :clearable="true" placeholder="请输入规则名称" />
 </el-form-item>
-            <el-form-item label="1-计时收费 2-按日收费:" prop="feeType">
-    <el-select v-model="formData.feeType" placeholder="请选择1-计时收费 2-按日收费" style="width:100%" filterable :clearable="true">
+            <el-form-item label="收费类型:" prop="feeType">
+    <el-select v-model="formData.feeType" placeholder="请选择收费类型" style="width:100%" filterable :clearable="true">
         <el-option v-for="(item,key) in fee_typeOptions" :key="key" :label="item.label" :value="item.value" />
     </el-select>
 </el-form-item>
-            <el-form-item label="1-小柜子 2-大柜子:" prop="lockerType">
-    <el-select v-model="formData.lockerType" placeholder="请选择1-小柜子 2-大柜子" style="width:100%" filterable :clearable="true">
+            <el-form-item label="柜子类型:" prop="lockerType">
+    <el-select v-model="formData.lockerType" placeholder="请选择柜子类型" style="width:100%" filterable :clearable="true">
         <el-option v-for="(item,key) in locker_typeOptions" :key="key" :label="item.label" :value="item.value" />
     </el-select>
 </el-form-item>
-            <el-form-item label="免费时长(小时):" prop="freeDuration">
+            <el-form-item label="免费时长:" prop="freeDuration">
     <el-input-number v-model="formData.freeDuration" style="width:100%" :precision="2" :clearable="true" />
 </el-form-item>
             <el-form-item label="是否启用押金:" prop="isDepositEnabled">
@@ -237,8 +185,8 @@
             <el-form-item label="押金金额:" prop="depositAmount">
     <el-input-number v-model="formData.depositAmount" style="width:100%" :precision="2" :clearable="true" />
 </el-form-item>
-            <el-form-item label="1-生效 0-失效:" prop="status">
-    <el-select v-model="formData.status" placeholder="请选择1-生效 0-失效" style="width:100%" filterable :clearable="true">
+            <el-form-item label="状态:" prop="status">
+    <el-select v-model="formData.status" placeholder="请选择状态" style="width:100%" filterable :clearable="true">
         <el-option v-for="(item,key) in rule_statusOptions" :key="key" :label="item.label" :value="item.value" />
     </el-select>
 </el-form-item>
@@ -253,13 +201,13 @@
                     <el-descriptions-item label="规则名称">
     {{ detailForm.ruleName }}
 </el-descriptions-item>
-                    <el-descriptions-item label="1-计时收费 2-按日收费">
+                    <el-descriptions-item label="收费类型">
     {{ detailForm.feeType }}
 </el-descriptions-item>
-                    <el-descriptions-item label="1-小柜子 2-大柜子">
+                    <el-descriptions-item label="柜子类型">
     {{ detailForm.lockerType }}
 </el-descriptions-item>
-                    <el-descriptions-item label="免费时长(小时)">
+                    <el-descriptions-item label="免费时长">
     {{ detailForm.freeDuration }}
 </el-descriptions-item>
                     <el-descriptions-item label="是否启用押金">
@@ -283,7 +231,7 @@
                     <el-descriptions-item label="押金金额">
     {{ detailForm.depositAmount }}
 </el-descriptions-item>
-                    <el-descriptions-item label="1-生效 0-失效">
+                    <el-descriptions-item label="状态">
     {{ detailForm.status }}
 </el-descriptions-item>
             </el-descriptions>
@@ -332,11 +280,11 @@ const appStore = useAppStore()
 const showAllQuery = ref(false)
 
 // 自动化生成的字典（可能为空）以及字段
-const is_deposit_enabledOptions = ref([])
-const is_advance_payOptions = ref([])
 const fee_typeOptions = ref([])
-const locker_typeOptions = ref([])
+const is_deposit_enabledOptions = ref([])
 const rule_statusOptions = ref([])
+const locker_typeOptions = ref([])
+const is_advance_payOptions = ref([])
 const formData = ref({
             networkId: undefined,
             ruleName: '',
@@ -446,11 +394,11 @@ getTableData()
 
 // 获取需要的字典 可能为空 按需保留
 const setOptions = async () =>{
-    is_deposit_enabledOptions.value = await getDictFunc('is_deposit_enabled')
-    is_advance_payOptions.value = await getDictFunc('is_advance_pay')
     fee_typeOptions.value = await getDictFunc('fee_type')
-    locker_typeOptions.value = await getDictFunc('locker_type')
+    is_deposit_enabledOptions.value = await getDictFunc('is_deposit_enabled')
     rule_statusOptions.value = await getDictFunc('rule_status')
+    locker_typeOptions.value = await getDictFunc('locker_type')
+    is_advance_payOptions.value = await getDictFunc('is_advance_pay')
 }
 
 // 获取需要的字典 可能为空 按需保留

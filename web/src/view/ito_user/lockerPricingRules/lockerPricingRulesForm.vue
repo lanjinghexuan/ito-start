@@ -9,17 +9,17 @@
         <el-form-item label="规则名称:" prop="ruleName">
     <el-input v-model="formData.ruleName" :clearable="true" placeholder="请输入规则名称" />
 </el-form-item>
-        <el-form-item label="1-计时收费 2-按日收费:" prop="feeType">
-    <el-select v-model="formData.feeType" placeholder="请选择1-计时收费 2-按日收费" style="width:100%" filterable :clearable="true">
+        <el-form-item label="收费类型:" prop="feeType">
+    <el-select v-model="formData.feeType" placeholder="请选择收费类型" style="width:100%" filterable :clearable="true">
         <el-option v-for="(item,key) in fee_typeOptions" :key="key" :label="item.label" :value="item.value" />
     </el-select>
 </el-form-item>
-        <el-form-item label="1-小柜子 2-大柜子:" prop="lockerType">
-    <el-select v-model="formData.lockerType" placeholder="请选择1-小柜子 2-大柜子" style="width:100%" filterable :clearable="true">
+        <el-form-item label="柜子类型:" prop="lockerType">
+    <el-select v-model="formData.lockerType" placeholder="请选择柜子类型" style="width:100%" filterable :clearable="true">
         <el-option v-for="(item,key) in locker_typeOptions" :key="key" :label="item.label" :value="item.value" />
     </el-select>
 </el-form-item>
-        <el-form-item label="免费时长(小时):" prop="freeDuration">
+        <el-form-item label="免费时长:" prop="freeDuration">
     <el-input-number v-model="formData.freeDuration" style="width:100%" :precision="2" :clearable="true" />
 </el-form-item>
         <el-form-item label="是否启用押金:" prop="isDepositEnabled">
@@ -47,8 +47,8 @@
         <el-form-item label="押金金额:" prop="depositAmount">
     <el-input-number v-model="formData.depositAmount" style="width:100%" :precision="2" :clearable="true" />
 </el-form-item>
-        <el-form-item label="1-生效 0-失效:" prop="status">
-    <el-select v-model="formData.status" placeholder="请选择1-生效 0-失效" style="width:100%" filterable :clearable="true">
+        <el-form-item label="状态:" prop="status">
+    <el-select v-model="formData.status" placeholder="请选择状态" style="width:100%" filterable :clearable="true">
         <el-option v-for="(item,key) in rule_statusOptions" :key="key" :label="item.label" :value="item.value" />
     </el-select>
 </el-form-item>
@@ -86,11 +86,11 @@ const router = useRouter()
 const btnLoading = ref(false)
 
 const type = ref('')
-const is_deposit_enabledOptions = ref([])
-const is_advance_payOptions = ref([])
 const fee_typeOptions = ref([])
-const locker_typeOptions = ref([])
+const is_deposit_enabledOptions = ref([])
 const rule_statusOptions = ref([])
+const locker_typeOptions = ref([])
+const is_advance_payOptions = ref([])
 const formData = ref({
             networkId: undefined,
             ruleName: '',
@@ -144,11 +144,11 @@ const init = async () => {
     } else {
       type.value = 'create'
     }
-    is_deposit_enabledOptions.value = await getDictFunc('is_deposit_enabled')
-    is_advance_payOptions.value = await getDictFunc('is_advance_pay')
     fee_typeOptions.value = await getDictFunc('fee_type')
-    locker_typeOptions.value = await getDictFunc('locker_type')
+    is_deposit_enabledOptions.value = await getDictFunc('is_deposit_enabled')
     rule_statusOptions.value = await getDictFunc('rule_status')
+    locker_typeOptions.value = await getDictFunc('locker_type')
+    is_advance_payOptions.value = await getDictFunc('is_advance_pay')
 }
 
 init()
